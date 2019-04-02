@@ -1,0 +1,51 @@
+import Authentication from "../authentication";
+
+/**
+ * Parent Context. Instantiated when initialize is called from the iframed
+ * application.
+ */
+export default class ParentContext {
+  public window: Window;
+  public parentWindow: Window;
+  public authentication: Authentication;
+
+  constructor() {
+    this.window = window;
+    this.parentWindow = window.parent;
+    this.authentication = new Authentication(this);
+
+    this.window.addEventListener("message", this.processMessage, false);
+  }
+
+  /**
+   * Handler for the postMessage browser API. Will reject any messages not sent
+   * from the same origin as the iframe, or those that do not come in as an
+   * object.
+   *
+   * @param event The browser MessageEvent
+   */
+  private processMessage = (event: MessageEvent) => {
+    const origin = event.origin;
+    const source = event.source;
+
+    // Reject any messages that come from the same window, or a different domain
+    if (source === this.window || origin !== this.window.location.origin) {
+      return;
+    }
+
+    // Reject, not the correct shape, potentially coming from something malicious
+    if (typeof event.data !== "object") {
+      return;
+    }
+
+    switch (event.data.type) {
+      case "authentication.success":
+        this.authentication.handleSuccessMessage(event.data.payload);
+        break;
+      case "authentication.failure":
+        this.authentication.handleFailureMessage(event.data.payload);
+        break;
+    }
+  };
+}
+
