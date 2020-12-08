@@ -4,8 +4,8 @@ const libraryName = 'procoreIframeHelpers';
 
 module.exports = {
   entry: {
-    'ProcoreIframeHelpers': './src/index.ts',
-    'ProcoreIframeHelpers.min': './src/index.ts'
+    'index': './src/index.ts',
+    'index.min': './src/index.ts'
   },
   output: {
     filename: '[name].js',
