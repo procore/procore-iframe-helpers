@@ -1,6 +1,6 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const libraryName = 'procoreIframeHelpers';
+const libraryName = 'ProcoreIframeHelpers';
 
 module.exports = {
   entry: {
