@@ -5,19 +5,19 @@ import ParentContext from "./contexts/parent";
  * Configuration to pass into authenticate.
  */
 interface AuthenticationConfig {
-  /** URL to open in auth window */
+  /* URL to open in auth window */
   url: string;
 
-  /** Height of the auth window, defaults to 600 */
+  /* Height of the auth window, defaults to 600 */
   height?: number;
 
-  /** Width of the auth window, defaults to 560 */
+  /* Width of the auth window, defaults to 560 */
   width?: number;
 
-  /** Callback to run if authentication fails */
+  /* Callback to run if authentication fails */
   onFailure: (error: any) => void;
 
-  /** Callback to run if authentication succeeds */
+  /* Callback to run if authentication succeeds */
   onSuccess: (payload: any) => void;
 }
 
