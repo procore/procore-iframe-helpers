@@ -5,19 +5,19 @@ import ParentContext from "./contexts/parent";
  * Configuration to pass into authenticate.
  */
 interface AuthenticationConfig {
-  /** URL to open in auth window */
+  /* URL to open in auth window */
   url: string;
 
-  /** Height of the auth window, defaults to 600 */
+  /* Height of the auth window, defaults to 600 */
   height?: number;
 
-  /** Width of the auth window, defaults to 560 */
+  /* Width of the auth window, defaults to 560 */
   width?: number;
 
-  /** Callback to run if authentication fails */
+  /* Callback to run if authentication fails */
   onFailure: (error: any) => void;
 
-  /** Callback to run if authentication succeeds */
+  /* Callback to run if authentication succeeds */
   onSuccess: (payload: any) => void;
 }
 
@@ -99,10 +99,10 @@ export default class Authentication {
    * @param payload Can be anything the user specifies. Will be passed onto
    * onSuccess in [[AuthContext]]
    */
-  public notifySuccess = (payload: any) => {
+  public notifySuccess = (payload: any, origin?: string) => {
     this.context.parentWindow.postMessage(
       { type: "authentication.success", payload: payload },
-      this.context.window.location.origin
+      origin ? origin : this.context.window.location.origin
     );
   };
 
@@ -113,10 +113,10 @@ export default class Authentication {
    * @param payload Can be anything the user specifies. Will be passed onto
    * onFailure in [[AuthContext]]
    */
-  public notifyFailure = (payload: any) => {
+  public notifyFailure = (payload: any, origin?: string) => {
     this.context.parentWindow.postMessage(
       { type: "authentication.failure", payload: payload },
-      this.context.window.location.origin
+      origin ? origin : this.context.window.location.origin
     );
   };
 

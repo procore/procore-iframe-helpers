@@ -1,4 +1,5 @@
 import Authentication from "../authentication";
+import { Config } from "../index";
 
 /**
  * Parent Context. Instantiated when initialize is called from the iframed
@@ -8,9 +9,11 @@ export default class ParentContext {
   public window: Window;
   public parentWindow: Window;
   public authentication: Authentication;
+  public config: Config;
 
-  constructor() {
+  constructor(config: Config) {
     this.window = window;
+    this.config = config;
     this.parentWindow = window.parent;
     this.authentication = new Authentication(this);
 
@@ -28,8 +31,16 @@ export default class ParentContext {
     const origin = event.origin;
     const source = event.source;
 
-    // Reject any messages that come from the same window, or a different domain
-    if (source === this.window || origin !== this.window.location.origin) {
+    // Reject any messages that come from the same window
+    if (source === this.window) {
+      return;
+    }
+
+    // Reject messages that come from an unexpected domain
+    let expectedDomains = this.config.validDomains || [];
+    expectedDomains.push(this.window.location.origin);
+
+    if (!expectedDomains.includes(origin)) {
       return;
     }
 
@@ -48,4 +59,3 @@ export default class ParentContext {
     }
   };
 }
-
