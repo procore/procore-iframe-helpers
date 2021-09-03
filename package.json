@@ -2,7 +2,7 @@
   "name": "@procore/procore-iframe-helpers",
   "author": "Procore",
   "homepage": "https://github.com/procore/procore-iframe-helpers",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
