@@ -99,10 +99,10 @@ export default class Authentication {
    * @param payload Can be anything the user specifies. Will be passed onto
    * onSuccess in [[AuthContext]]
    */
-  public notifySuccess = (payload: any) => {
+  public notifySuccess = (payload: any, origin?: string) => {
     this.context.parentWindow.postMessage(
       { type: "authentication.success", payload: payload },
-      this.context.window.location.origin
+      origin ? origin : this.context.window.location.origin
     );
   };
 
@@ -113,10 +113,10 @@ export default class Authentication {
    * @param payload Can be anything the user specifies. Will be passed onto
    * onFailure in [[AuthContext]]
    */
-  public notifyFailure = (payload: any) => {
+  public notifyFailure = (payload: any, origin?: string) => {
     this.context.parentWindow.postMessage(
       { type: "authentication.failure", payload: payload },
-      this.context.window.location.origin
+      origin ? origin : this.context.window.location.origin
     );
   };
 
