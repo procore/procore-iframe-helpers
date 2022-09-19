@@ -5,7 +5,7 @@
 Create a new context object by calling:
 
 ```javascript
-const context = procoreIframeHelpers.initialize();
+const context = ProcoreIframeHelpers.initialize();
 ```
 
 This context can be used to gather information about the current environment
@@ -25,7 +25,7 @@ library:
 <button onclick="login">Sign in With Procore</button>
 
 <script>
-  const context = procoreIframeHelpers.initialize();
+  const context = ProcoreIframeHelpers.initialize();
 
   function login() {
     // Will be filled in
@@ -69,7 +69,7 @@ that, render an html page with just this script tag:
 
 ```javascript
 <script>
-  const context = procoreIframeHelpers.initialize();
+  const context = ProcoreIframeHelpers.initialize();
 
   // Not required to send a payload, but you can if you'd like. This is the
   // payload passed to your onSuccess handler.
